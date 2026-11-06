@@ -137,5 +137,19 @@ Even when filtering for the model's highest confidence trades (threshold > 0.52)
 
 ![Winrate Threshold](results/plots/winrate_threshold.png)
 
+## Modern Validation: Triple-Barrier & CPCV
+
+To ensure maximum robustness, we refactored the research pipeline using the methodologies from *Advances in Financial Machine Learning* (López de Prado).
+
+1.  **Triple-Barrier Labeling:** Instead of manual TP/SL, we used an upper barrier (+0.15%), a lower barrier (-0.15%), and a time barrier (24 hours). This perfectly balanced the dataset (51% wins / 49% losses).
+2.  **Combinatorial Purged Cross-Validation (CPCV):** We generated 15 distinct backtest paths, purging overlapping data and applying an embargo to prevent leakage.
+
+### Results (NO-GO)
+*   **Mean Accuracy:** 49.72%
+*   **Std Deviation:** 0.0074
+*   **Min/Max:** 48.02% / 50.78%
+
+**Conclusion:** Even with state-of-the-art validation, the basic features (Spread, ATR) show zero predictive power for EURUSD 15M. The market is highly efficient at this timeframe. The next step requires alternative data representations (e.g., Path Signatures).
+
 Prepared by: Arkady Skvortsov (Quant ML Researcher)
 Tools Used: Python, DuckDB, XGBoost, PyTorch, Giotto-TDA, EconML, MT5 API.
