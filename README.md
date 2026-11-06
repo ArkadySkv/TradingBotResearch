@@ -149,6 +149,15 @@ To ensure maximum robustness, we refactored the research pipeline using the meth
 *   **Std Deviation:** 0.0074
 *   **Min/Max:** 48.02% / 50.78%
 
+## Advanced Research: Path Signatures (Iteration 11)
+
+Following the baseline CPCV tests, we introduced **Path Signatures** (rough path theory) to capture the multi-channel geometric path of Price and Spread over a 24-hour window (96 candles, depth=3). 
+
+*   **Methodology:** 14 signature features were generated for each timestamp using `iisignature`. We applied the same Triple-Barrier labeling (+/- 0.15%, 24h limit) and Combinatorial Purged CV (15 paths).
+*   **Result:** Mean Accuracy 48.66% (Std: 0.0099).
+
+**Conclusion:** The information-theoretic content of retail OHLCV data at the 15M timeframe is insufficient to predict future direction, regardless of feature complexity. Path signatures require true Level-2 order book data (microstructure) to be effective
+
 **Conclusion:** Even with state-of-the-art validation, the basic features (Spread, ATR) show zero predictive power for EURUSD 15M. The market is highly efficient at this timeframe. The next step requires alternative data representations (e.g., Path Signatures).
 
 Prepared by: Arkady Skvortsov (Quant ML Researcher)
